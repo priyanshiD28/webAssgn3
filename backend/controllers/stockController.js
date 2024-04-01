@@ -83,9 +83,9 @@ const deleteStockP = async (request,response) => {
 //delete stock from watchlist
 const deleteStockW = async (request,response) => {
     const {ticker} = request.params 
-    if(!mongoose.Types.ObjectId.isValid(ticker)) {
-        return response.status(404).json({error: "No Stock Details"})
-    }
+    // if(!mongoose.Types.ObjectId.isValid(ticker)) {
+    //     return response.status(404).json({error: "No Stock Details"})
+    // }
 
     const delwatchlist = await WatchlistM.findOneAndDelete({ticker})
     if(!delwatchlist) {
