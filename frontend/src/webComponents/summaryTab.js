@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Navigate} from 'react-router-dom';
 import {useData} from '../DataContext';
 import Container from '@mui/material/Container';
 import { Row } from 'react-bootstrap';
@@ -61,7 +61,7 @@ function SummaryTab() {
                 <Row className="justify-content-md-center">
                     <div>
                         {compPeers.map((item, idx) => (
-                            <NavLink href={`/search/${peerPath}`} onClick={()=>newCompany(item)}>{item}, </NavLink>
+                            <Navigate to={`/search/${peerPath}`} onClick={()=>newCompany(item)}>{item}, </Navigate>
                         ))}
                     </div>
                 </Row>
