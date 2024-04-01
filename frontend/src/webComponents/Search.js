@@ -52,7 +52,7 @@ function Search () {
     // const [query, setQuery] = useState("");
 
     const handleChange = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         setAlertBool(false)
         setSearchInput(e.target.value);
     };
