@@ -19,8 +19,8 @@ function App() {
           <div className='pages' style={{marginTop: 200, marginBottom: 100}}>
             <Routes>
             <Route 
-                path="/search"
-                element={<SearchComponent />}
+                path="/"
+                element={<Navigate replace to="/search/home" />}
               />
               <Route 
                 path="/search/home"
