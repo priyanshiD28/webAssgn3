@@ -1,0 +1,19 @@
+.autoDropdown {
+    min-height: none;
+    max-height: 200px;
+    overflow-y: auto;
+    width: fit-content;
+}
+
+/* Define the custom blue background color */
+.bg-custom-blue {
+    background-color: #0a0366; /* Example blue color */
+  }
+
+  /* Make the navigation bar fixed at the top of the viewport */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar is above other content */
+}
