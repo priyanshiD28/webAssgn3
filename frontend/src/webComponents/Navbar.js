@@ -19,7 +19,7 @@ const Navbar = () => {
 
     useEffect(() => {
         if (searchQuery == "") {
-            console.log(searchQuery);
+            //console.log(searchQuery);
             setPath('home');
         }
         else {
