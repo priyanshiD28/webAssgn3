@@ -68,10 +68,10 @@ const addStockW = async(request,response) => {
 
 //delete stock from portfolio
 const deleteStockP = async (request,response) => {
-    const {ticker} = request.params 
-    if(!mongoose.Types.ObjectId.isValid(ticker)) {
-        return response.status(404).json({error: "No Stock Details"})
-    }
+    const {id} = request.params 
+    // if(!mongoose.Types.ObjectId.isValid(id)) {
+    //     return response.status(404).json({error: "No Stock Details"})
+    // }
 
     const delportfolio = await PortfolioM.findOneAndDelete({ticker})
     if(!delportfolio) {
@@ -82,12 +82,13 @@ const deleteStockP = async (request,response) => {
 }
 //delete stock from watchlist
 const deleteStockW = async (request,response) => {
-    const {ticker} = request.params 
+    const {id} = request.params 
     // if(!mongoose.Types.ObjectId.isValid(ticker)) {
     //     return response.status(404).json({error: "No Stock Details"})
     // }
 
-    const delwatchlist = await WatchlistM.findOneAndDelete({ticker: `${ticker}`})
+    const delwatchlist = await WatchlistM.findOneAndDelete({ticker: `${id}`})
+    console.log(delwatchlist, id)
     if(!delwatchlist) {
         return response.status(404).json({error: "Stock Not Available"})
     }
