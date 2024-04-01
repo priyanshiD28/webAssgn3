@@ -52,7 +52,7 @@ function Search () {
     // const [query, setQuery] = useState("");
 
     const handleChange = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         setAlertBool(false)
         setSearchInput(e.target.value);
     };
@@ -95,7 +95,7 @@ function Search () {
                     />
                     <Button variant="border-0 " onClick={()=>{
                         submitButton(searchInput)
-                        console.log('SUBMIT')
+                        console.log('SUBMIT',searchInput)
                         }}><AiOutlineSearch /></Button>
                     <Button variant="border-0" type="reset" onClick={()=>{clearButton()}}><MdClear /></Button>
             </InputGroup>
