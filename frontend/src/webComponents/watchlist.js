@@ -35,8 +35,9 @@ const WatchListCard = () => {
         }
     },[watchlistData])
 
-    const handleDeleteStock = (ticker) => {
-        const delStock = axios.delete(apiCallURL+'stocks/watchlist/'+ticker);
+    const handleDeleteStock = async(ticker) => {
+        const delStock = await axios.delete(apiCallURL+'stocks/watchlist/'+ticker);
+        console.log(delStock)
     };
 
     return (
