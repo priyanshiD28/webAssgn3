@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
-
+import { useData } from '../DataContext';
 import Card from 'react-bootstrap/Card';
 
 const WatchListCard = () => {
+    const {
+        watchlistData, setWatchlistData,
+        wlTicker, setWLTicker,
+        wlName, setWLName,
+
+        watchlistUpdater,
+    } = useData();
+    watchlistUpdater();
     return (
         <>
-      {[
-        'Primary',
-        'Secondary',
-        'Success',
-        'Danger',
-        'Warning',
-        'Info',
-        'Light',
-        'Dark',
-      ].map((variant) => (
+      {watchlistData.map((item,idx) => (
         <Card
-          bg={variant.toLowerCase()}
-          key={variant}
-          text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-          style={{ width: '18rem' }}
-          className="mb-2"
+          bg="light"
+          text='dark'
+          style={{ width: 600}}
+          className="mx-auto"
         >
           <Card.Header>Header</Card.Header>
           <Card.Body>
-            <Card.Title>{variant} Card Title </Card.Title>
+            <Card.Title>{item.ticker} </Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              {item.companyName}
             </Card.Text>
           </Card.Body>
         </Card>

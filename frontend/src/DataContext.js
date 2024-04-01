@@ -63,6 +63,13 @@ export const DataReceiver = ({ children }) => {
 
     const [dynamicColor, setDynamicColor] = useState('red');
 
+    const [watchlistData, setWatchlistData] = useState([]);
+    const [wlTicker, setWLTicker] = useState("");
+    const [wlName, setWLName] = useState("");
+    const [wlC, setWLC] = useState(0);
+    const [wlD, setWLD] = useState(0);
+    const [wlDP, setWLDP] = useState(0);
+
 
     const dataUpdater = async (ticker) => {
         setSearchQuery(ticker)
@@ -88,6 +95,16 @@ export const DataReceiver = ({ children }) => {
         setCompanyPeers(comppeer.data)
         //console.log(compPeers)
     };
+
+    const watchlistUpdater = async() => {
+        const wlData = await axios.get(apiCallURL+'stocks/watchlist');
+        setWatchlistData(wlData.data)
+    };
+
+    useEffect(() => {
+        setWLTicker(watchlistData.ticker);
+        setWLName(watchlistData.companyName);
+    },[watchlistData])
 
     useEffect(() => {
         if(stockQuote.d > 0) {
@@ -270,6 +287,11 @@ export const DataReceiver = ({ children }) => {
 
         dynamicColor, setDynamicColor,
 
+        watchlistData, setWatchlistData,
+        wlTicker, setWLTicker,
+        wlName, setWLName,
+
+        watchlistUpdater,
         dataUpdater,
     };
 
