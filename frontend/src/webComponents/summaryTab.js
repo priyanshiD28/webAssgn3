@@ -61,7 +61,7 @@ function SummaryTab() {
                 <Row className="justify-content-md-center">
                     <div>
                         {compPeers.map((item, idx) => (
-                            <NavLink to={`/search/${peerPath}`} onClick={()=>newCompany(item)}>{item}, </NavLink>
+                            <NavLink to={`/search/${item}`} onClick={()=>newCompany(item)}>{item}, </NavLink>
                         ))}
                     </div>
                 </Row>
