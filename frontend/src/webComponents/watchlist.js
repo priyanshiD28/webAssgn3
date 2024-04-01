@@ -28,12 +28,12 @@ const WatchListCard = () => {
         <Card
           bg="light"
           text='dark'
-          style={{ width: 600}}
+          style={{ width: '80%'}}
           className="mx-auto my-2"
         >
-          <Card.Header>Header</Card.Header>
+          {/* <Card.Header>Header</Card.Header> */}
           <Card.Body>
-            <Card.Text><ClearIcon onClick = {()=> handleDeleteStock(item.ticker)}></ClearIcon></Card.Text>
+            <ClearIcon onClick = {()=> handleDeleteStock(item.ticker)}></ClearIcon>
             <Card.Title>{item.ticker} </Card.Title>
             <Card.Text>
               {item.companyName}
