@@ -34,7 +34,9 @@ function SummaryTab() {
     const [peerPath, setPeerPath] = useState('');
 
     const newCompany = async(ticker) => {
+        
         setPeerPath(ticker)
+        console.log(peerPath)
         await dataUpdater(ticker)
         
     };
