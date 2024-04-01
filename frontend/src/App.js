@@ -8,7 +8,7 @@ import DisplayTab from './webComponents/displaytab'
 import NavBar from './webComponents/Navbar'
 import Footer from './webComponents/footer';
 import SearchComponent from './webComponents/Search';
-import watchListCard from './webComponents/watchlist';
+import WatchListCard from './webComponents/watchlist';
 
 import {DataReceiver} from './DataContext'
 
@@ -34,7 +34,7 @@ function App() {
               />
               <Route 
                 path="/watchlist"
-                element= {<watchListCard />}
+                element= {<WatchListCard />}
               />
               <Route
                 path="/portfolio"

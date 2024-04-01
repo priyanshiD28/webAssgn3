@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 
-const watchListCard = () => {
+const WatchListCard = () => {
     return (
         <>
       {[
@@ -36,4 +36,4 @@ const watchListCard = () => {
     );
 }
 
-export default watchListCard;
+export default WatchListCard;
