@@ -87,7 +87,7 @@ const deleteStockW = async (request,response) => {
     //     return response.status(404).json({error: "No Stock Details"})
     // }
 
-    const delwatchlist = await WatchlistM.findOneAndDelete({ticker})
+    const delwatchlist = await WatchlistM.findOneAndDelete({ticker: `${ticker}`})
     if(!delwatchlist) {
         return response.status(404).json({error: "Stock Not Available"})
     }
