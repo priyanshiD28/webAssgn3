@@ -44,6 +44,7 @@ const WatchlistPage = () =>{
                         setWLEmpty(true)
                     }
                     setWLResult(wlData.data)
+                    console.log(wlData.data)
                 }
                 else {
                     setWLEmpty(false)
