@@ -4,6 +4,7 @@ const { WatchlistM } = require('../models/stockmodel')
 const {
     addStockP,
     addStockW,
+    getWallet,
     getWatchlistDetails,
     getPortfolioDetails,
     getSingleWatchlistDetail,

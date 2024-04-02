@@ -24,10 +24,17 @@ const PortfolioCard = (pDB) => {
     const [sellModalState, setSellModalState] = useState(false);
     const [wallet,setWallet] = useState(0);
 
-
-    const colorChange = (item) => {
-        return (item > 0 ? 'text-success' : 'text-danger')
+    const handleBuy = async()=> {
+        const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
+        setWallet(getWallet.data)
     }
+
+    const handleSell = async() => {
+        const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
+        setWallet(getWallet.data)
+    }
+
+
 
     useEffect(() => {
         console.log(pDB.pDB.ticker)
