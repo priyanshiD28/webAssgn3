@@ -20,8 +20,8 @@ const WatchListCard = (wlDB, deleteFunction) => {
         console.log(wlDB.wlDB.ticker)
         setWLTicker(wlDB.wlDB.ticker)
         setWLName(wlDB.wlDB.companyName)
-        const fetchData = (ticker) => {
-            const getStockData = axios.get(apiCallURL+'search/stock/'+ticker)
+        const fetchData = async(ticker) => {
+            const getStockData = await axios.get(apiCallURL+'search/stock/'+ticker)
             setWLStock(getStockData.data)
             console.log(getStockData.data)
         }
