@@ -27,6 +27,7 @@ function Search () {
     const [autoCompleteDataBoolean, setAutoCompleteDataBoolean ] = useState(false);
     const [spinnerBoolean, setSpinnerBoolean ] = useState(false);
     const [alertBool, setAlertBool] = useState(false);
+    const [loadBool, setLoadBool] = useState(false);
     var autoCompAPI = '';
     
     const {
@@ -58,6 +59,7 @@ function Search () {
     };
     
     const submitButton = async(ticker) => {
+        setLoadBool(true)
         if(!ticker || ticker=='' || ticker.length==0) {
             setAlertBool(true)
         }
@@ -65,7 +67,7 @@ function Search () {
             await dataUpdater(searchInput)
             navigate('/search/'+searchInput);
         }
-    
+        setLoadBool(false)
     }
 
     const clearButton = () => {
@@ -118,6 +120,8 @@ function Search () {
                 }
             </Container>
             </Row>
+
+            {loadBool ? <Spinner /> : (<span></span>)}
 
             {alertBool ?
             <Container>

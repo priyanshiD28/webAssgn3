@@ -9,8 +9,6 @@ import Card from 'react-bootstrap/Card';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Container } from 'react-bootstrap';
 
-const apiCallLocalHost = 'http://localhost:4000/api/';
-
 const WatchListCard = () => {
     const {
         watchlistData, setWatchlistData,
@@ -23,29 +21,36 @@ const WatchListCard = () => {
 
     const [wlTicker, setWLTicker] = useState("");
     const [wlName, setWLName] = useState("");
-    const [wlC, setWLC] = useState(0);
-    const [wlD, setWLD] = useState(0);
-    const [wlDP, setWLDP] = useState(0);
+    const [wlStock, setWLStock] = useState([]);
+    const [wlC, setWLC] = useState([]);
+    const [wlD, setWLD] = useState([]);
+    const [wlDP, setWLDP] = useState([]);
 
     useEffect(() => {
         watchlistUpdater();
     }, [])
 
     useEffect(() => {
+        setWLLoading(true)
         if(!watchlistData || watchlistData.length==0) {
             setWLEmpty(true)
         }
+
+        fetchData()
+        setWLLoading(false)
+
     },[watchlistData])
 
+    const fetchData = (item) => {
+        const getStockData = axios.get(apiCallURL+'search/stock/'+item)
+        setWLC(getStockData.data.c)
+        setWLD(getStockData.data.d)
+        setWLDP(getStockData.data.dp)
+    }
+
     function handleDeleteStock(ticker) {
-        axios.delete(apiCallLocalHost + 'stocks/watchlist/' + ticker)
-        .then(response => {
-            console.log("Stock Deleted: ",response.data);
-            watchlistUpdater();
-        })
-        .catch(error =>{
-            console.error("Error Deleting Stock: ",error)
-        })        
+        const deleteWL = axios.delete(apiCallURL + 'stocks/watchlist/' + ticker);
+        watchlistUpdater(deleteWL.data)        
     }
 
     return (
