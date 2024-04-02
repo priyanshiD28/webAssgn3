@@ -121,7 +121,7 @@ function Search () {
             </Container>
             </Row>
 
-            {loadBool ? <Spinner /> : (<span></span>)}
+            {loadBool ? <Container className="mx-auto"><Spinner /></Container> : (<span></span>)}
 
             {alertBool ?
             <Container>

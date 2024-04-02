@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
         <DataReceiver>
           <NavBar />
-          <div className='pages' style={{marginTop: 200, marginBottom: 100}}>
+          <div className='pages' style={{marginTop: 100, marginBottom: 100}}>
             <Routes>
             <Route 
                 path="/"
