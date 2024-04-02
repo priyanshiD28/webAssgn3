@@ -17,7 +17,7 @@ const WatchListCard = (wlDB, deleteFunction) => {
     const [wlDP, setWLDP] = useState([]);
 
     useEffect(() => {
-        console.log(wlDB)
+        console.log(wlDB.wlDB.ticker)
         setWLTicker(wlDB.ticker)
         setWLName(wlDB.companyName)
         const fetchData = (ticker) => {
