@@ -9,6 +9,8 @@ import Card from 'react-bootstrap/Card';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Container } from 'react-bootstrap';
 
+const apiCallLocalHost = 'http://localhost:4000/api/';
+
 const WatchListCard = () => {
     const {
         watchlistData, setWatchlistData,
@@ -36,7 +38,7 @@ const WatchListCard = () => {
     },[watchlistData])
 
     function handleDeleteStock(ticker) {
-        axios.delete(apiCallURL + 'stocks/watchlist/' + ticker)
+        axios.delete(apiCallLocalHost + 'stocks/watchlist/' + ticker)
         .then(response => {
             console.log("Stock Deleted: ",response.data);
             watchlistUpdater();
