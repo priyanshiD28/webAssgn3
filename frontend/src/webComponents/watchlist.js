@@ -36,8 +36,14 @@ const WatchListCard = () => {
     },[watchlistData])
 
     function handleDeleteStock(ticker) {
-        axios.delete(apiCallURL + 'stocks/watchlist/' + ticker);
-        watchlistUpdater();
+        axios.delete(apiCallURL + 'stocks/watchlist/' + ticker)
+        .then(response => {
+            console.log("Stock Deleted: ",response.data);
+            watchlistUpdater();
+        })
+        .catch(error =>{
+            console.error("Error Deleting Stock: ",error)
+        })        
     }
 
     return (

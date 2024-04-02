@@ -95,6 +95,8 @@ export const DataReceiver = ({ children }) => {
         setWatchlistData(wlData.data)
     };
 
+    
+
     // useEffect(() => {
     //     setWLTicker(watchlistData.ticker);
     //     setWLName(watchlistData.companyName);
