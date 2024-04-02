@@ -49,7 +49,7 @@ const WatchListCard = (wlDB, deleteFunction) => {
                 className="mx-auto my-2"
             >        
             <Card.Body>
-                <Button onClick = {deleteFunction} className='btn-primary-outline'><ClearIcon></ClearIcon></Button>
+                <Button onClick = {deleteFunction} variant="border-0 "><ClearIcon></ClearIcon></Button>
                 <Row>
                     <Col>
                         <h6>{wlTicker}</h6>
