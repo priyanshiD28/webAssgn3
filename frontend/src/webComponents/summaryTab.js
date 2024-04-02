@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {NavLink, Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {useData} from '../DataContext';
 import Container from '@mui/material/Container';
 import { Row } from 'react-bootstrap';
@@ -35,9 +35,9 @@ function SummaryTab() {
 
     const newCompany = async(ticker) => {
         
-        setPeerPath(ticker)
         console.log(peerPath)
         await dataUpdater(ticker)
+        setPeerPath(ticker)
         
     };
 
@@ -61,7 +61,7 @@ function SummaryTab() {
                 <Row className="justify-content-md-center">
                     <div>
                         {compPeers.map((item, idx) => (
-                            <NavLink to={`/search/${item}`} onClick={()=>newCompany(item)}>{item}, </NavLink>
+                            <Link to={`/search/${item}`} onClick={()=>newCompany(item)}>{item}, </Link>
                         ))}
                     </div>
                 </Row>
