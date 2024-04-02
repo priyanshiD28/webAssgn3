@@ -28,7 +28,6 @@ import {useData} from '../DataContext';
 
 function DisplayTab () {
     const [val, setVal] = useState('one'); 
-    const navigate = useNavigate();
     // const [query, setQuery] = useState("");
 
     const {

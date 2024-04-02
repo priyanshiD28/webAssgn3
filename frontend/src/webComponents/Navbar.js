@@ -15,7 +15,6 @@ const Navbar = () => {
         searchQuery, setSearchQuery, 
     } = useData();
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (searchQuery == "") {
