@@ -77,7 +77,7 @@ function DisplayTab () {
                                 <Col xs md lg="10">
                                     <Row>
                                         <Col><SummaryTab /></Col>
-                                        <Col xs md lg="5">
+                                        <Col xs sm md lg="5">
                                             <SummaryChart />
                                         </Col>
                                     </Row>
@@ -103,11 +103,9 @@ function DisplayTab () {
                                     <InsightTable />
                                     <Container>
                                         <Row className="justify-content-md-center">
-                                            <Col xs md lg="5"><ReccCharts /></Col>
-                                            <Col xs md lg="1"></Col>
-                                            <Col xs md lg="5">
-                                            <SurpriseCharts />
-                                            </Col>
+                                            <Col xs sm md lg="5"><ReccCharts /></Col>
+                                            <Col xs sm md lg="1"></Col>
+                                            <Col xs sm md lg="5"><SurpriseCharts /></Col>
                                         </Row>
                                     </Container>
                                 </div>

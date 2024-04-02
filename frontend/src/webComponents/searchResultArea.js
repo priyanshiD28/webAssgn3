@@ -100,7 +100,7 @@ const SearchResultArea = () => {
                         </div>
                     </div>
                     <div className='col-4'>
-                        <h2 className={colorChange(changedPrice)}>{latestPrice}</h2>
+                    <h2 className={colorChange(changedPrice)}>{latestPrice}</h2>
                         <h4 className={colorChange(changedPrice)} >
                         {changedPrice > 0 ?  (
                             <BiSolidUpArrow />

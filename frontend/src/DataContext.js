@@ -88,6 +88,16 @@ export const DataReceiver = ({ children }) => {
         //console.log(compPeers)
     };
 
+    useEffect(()=>{
+        const fetchData = async(ticker) => {
+            const stockquote = await axios.get(apiCallURL+'search/stock/'+ticker)
+            setStockQuote(stockquote.data)
+        }
+        fetchData(searchQuery)
+        const interval = setInterval(fetchData, 15000)
+        return () => clearInterval(interval)
+    })
+
     useEffect(() => {
         if(stockQuote.d > 0) {
             setDynamicColor('green')

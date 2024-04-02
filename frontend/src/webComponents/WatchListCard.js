@@ -32,6 +32,8 @@ const WatchListCard = (wlDB, deleteFunction) => {
         }
         console.log(wlDB.wlDB.ticker)
         fetchData(wlDB.wlDB.ticker)
+        const interval = setInterval(fetchData, 15000)
+        return () => clearInterval(interval)
         console.log(wlStock)
     }, [wlDB])
 
@@ -45,7 +47,7 @@ const WatchListCard = (wlDB, deleteFunction) => {
             <Card
                 bg="light"
                 text='dark'
-                style={{ width: '80%'}}
+                style={{ width: '90%'}}
                 className="mx-auto my-2"
             >        
             <Card.Body>
