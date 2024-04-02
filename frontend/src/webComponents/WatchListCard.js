@@ -17,15 +17,15 @@ const WatchListCard = (wlDB, deleteFunction) => {
     const [wlDP, setWLDP] = useState([]);
 
     useEffect(() => {
-        console.log(wlDB.wlDB.ticker)
-        setWLTicker(wlDB.ticker)
-        setWLName(wlDB.companyName)
+        setWLTicker(wlDB.wlDB.ticker)
+        setWLName(wlDB.wlDB.companyName)
         const fetchData = (ticker) => {
             const getStockData = axios.get(apiCallURL+'search/stock/'+ticker)
             setWLStock(getStockData.data)
             console.log(getStockData.data)
         }
-        fetchData(wlDB.ticker)
+        console(wlTicker)
+        fetchData(wlTicker.ticker)
         console.log(wlStock)
     }, [wlDB])
 
