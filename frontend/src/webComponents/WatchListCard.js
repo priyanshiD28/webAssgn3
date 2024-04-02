@@ -24,7 +24,7 @@ const WatchListCard = (wlDB, deleteFunction) => {
             setWLStock(getStockData.data)
             console.log(getStockData.data)
         }
-        console(wlTicker)
+        console.log(wlTicker)
         fetchData(wlTicker.ticker)
         console.log(wlStock)
     }, [wlDB])
