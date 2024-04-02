@@ -44,7 +44,6 @@ const WatchlistPage = () =>{
                         setWLEmpty(true)
                     }
                     setWLResult(wlData.data)
-                    console.log(wlData.data)
                 }
                 else {
                     setWLEmpty(false)
@@ -60,8 +59,6 @@ const WatchlistPage = () =>{
             }
 
         getWLStocks()
-        console.log(wlEmpty)
-        console.log(wlResult)
       },[check])
 
     
