@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../index.js'
 import apiCallURL from '../index.js';
+import { useData } from '../DataContext.js';
 
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 const WatchListCard = ({wlDB, deleteFunction}) => {
 
@@ -42,6 +45,15 @@ const WatchListCard = ({wlDB, deleteFunction}) => {
         setWLD(wlStock.d)
         setWLDP(wlStock.dp)
     },[wlStock])
+
+    const navigate = useNavigate();
+    const {dataUpdater} = useData();
+
+    const reroute = async(ticker) => {
+        await dataUpdater(ticker);
+        navigate('../search/'+ticker)
+    }
+
     return (
         <>
             <Card
@@ -49,6 +61,9 @@ const WatchListCard = ({wlDB, deleteFunction}) => {
                 text='dark'
                 style={{ width: '90%'}}
                 className="mx-auto my-2"
+                onClick={() => {
+                    reroute(wlTicker);
+                }}
             >        
             <Card.Body>
                 <Button onClick = {(e)=>{

@@ -28,6 +28,7 @@ function Search () {
     const [spinnerBoolean, setSpinnerBoolean ] = useState(false);
     const [alertBool, setAlertBool] = useState(false);
     const [loadBool, setLoadBool] = useState(false);
+    
     var autoCompAPI = '';
     
     const {
@@ -88,7 +89,7 @@ function Search () {
         <div>
             <Stack direction="vertical" gap={5}>
             <Row xs sm md lg="25" className="mx-auto">
-            <InputGroup className="border border-4 border-primary rounded-pill mx-auto" value={searchInput}>
+            <InputGroup className="border border-4 border-primary rounded-pill mx-auto" value={searchInput} onChang>
                     <Form.Control
                     className="border-0 rounded-pill" placeholder="Enter Stock Ticker Symbol"
                     aria-label="Stock ticker with two button addons"

@@ -18,6 +18,10 @@ const PortfolioPage = () =>{
     const [pResult, setPResult] = useState([]);
     const [walletResult, setWalletResult] = useState([]);
     const [walletVal, setWalletVal] = useState(0);
+
+    const rerender = () =>{
+        setCheck(check+1)    
+    }
     
     useEffect(()=>{
         const getPStocks = async () =>{
@@ -71,7 +75,11 @@ const PortfolioPage = () =>{
                     (pEmpty ? 
                         <Container>
                             {pResult.map((item,idx) => (
-                                <PortfolioCards pDB={item}></PortfolioCards>
+                                // console.log(item),
+                                <PortfolioCards pDB={item} rerenderFunction={(e)=> {
+                                    e.preventDefault();
+                                    rerender();
+                                }}></PortfolioCards>
                             ))}
                         </Container>:
                         <Card className='bg-warning text-center color-dark'>

@@ -142,6 +142,8 @@ const SearchResultArea = () => {
     //     return () => clearInterval(interval)
     // })
 
+    
+
     return (
         // <Container>
         //     <Row>
@@ -172,7 +174,7 @@ const SearchResultArea = () => {
                         <h5>{compName}</h5>
                         <h6>{exchName}</h6>
                         {/* <button type="button" className="btn btn-success" onClick={() => handleBuyModalShow({companySymbol: tickerSymbol ,currentPrice: latestPrice, moneyInWallet:"100",companyName: compName })}>Buy</button> */}
-                        <button type="button" className="btn btn-danger">Sell</button>
+                        {/* <button type="button" className="btn btn-danger">Sell</button> */}
                     </div>
                     <div className='col-4'>
                         <div className='img-fluid mx-auto d-block'>

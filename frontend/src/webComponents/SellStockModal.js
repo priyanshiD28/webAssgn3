@@ -52,7 +52,7 @@ export default class SellStockModal extends React.Component {
                         Sell
                     </Button> :
                     <Button variant="primary" type="submit" onClick={() => {
-                            this.props.handleSubmit(this.state.currentQuantity, this.props.currPrice)
+                            this.props.handleSubmit(this.state.currentQuantity, this.props.currentPrice)
                             this.props.closeModal()
                         }}>
                         Sell

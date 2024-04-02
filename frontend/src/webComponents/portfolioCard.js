@@ -10,7 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 
-const PortfolioCard = ({pDB}) => {
+const PortfolioCard = ({pDB, rerenderFunction}) => {
 
     const [pTicker, setPTicker] = useState("");
     const [pName, setPName] = useState("");
@@ -45,6 +45,7 @@ const PortfolioCard = ({pDB}) => {
                 avgCostPSh: updatedCostPrice
             })
             if(newQuantity.status == 200) {
+                rerenderFunction();
                 // update portfolio page
             }
         }
@@ -73,12 +74,14 @@ const PortfolioCard = ({pDB}) => {
                 let newStockVal = pDB
                 newStockVal.quantity = updatedQuantity
                 // update portfolio page
+                rerenderFunction();
             }
         }
         else {
             const newQuantity = await axios.delete(apiCallURL+'search/portfolio/'+pDB.ticker)
             if(newQuantity.status == 200) {
                 //update portfolio page
+                rerenderFunction();
             }
         }
 
@@ -88,6 +91,7 @@ const PortfolioCard = ({pDB}) => {
 
     useEffect(() => {
         console.log(pDB.ticker)
+        // console.log(pDB)
         setPTicker(pDB.ticker)
         setPName(pDB.companyName)
         setPQuantity(pDB.quantity)
@@ -145,7 +149,7 @@ const PortfolioCard = ({pDB}) => {
                 </Row>
                 </Card.Body>
                 <Card.Footer> 
-                    <Button onClick={()=>{setBuyModalState(true)}} className='mx-1'>Buy</Button> 
+                    <Button onClick={()=>{setBuyModalState(true); console.log(buyModalState)}} className='mx-1'>Buy</Button> 
                     <Button onClick={()=>{setSellModalState(true)}} className='mx-1 bg-danger border-0'>Sell</Button>
                         {buyModalState ? <BuyStockModal 
                             shutModal={()=>setBuyModalState(false)} 
