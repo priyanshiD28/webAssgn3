@@ -32,7 +32,7 @@ const WatchlistPage = () =>{
     useEffect(()=>{
         const getWLStocks = async () =>{
             try{
-                const wlData = await axios.get(apiCallURL+'watchlist');
+                const wlData = await axios.get(apiCallURL+'stocks/watchlist');
 
                 if(wlData.status == 200){
                     
