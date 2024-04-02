@@ -18,7 +18,7 @@ const WatchlistPage = () =>{
     const [check, setCheck] = useState(0);
     
     const deleteStock = async (ticker) =>{
-        const singleWLData = await axios.delete(apiCallURL+'watchlist/'+ticker)
+        const singleWLData = await axios.delete(apiCallURL+'stocks/watchlist/'+ticker)
         .then(singleWLData => {
             console.log('Stock Deleted');
             setWLResult([])
