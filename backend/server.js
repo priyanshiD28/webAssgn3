@@ -14,7 +14,7 @@ const _dirname = path.dirname("");
 const buildPath = path.join(_dirname, "../frontend/build");
 
 const corsOptions = {
-    origin: ['http://localhost:3000','http://18.225.92.135/']
+    origin: ['http://localhost:4000','http://18.225.92.135/']
 };
 
 webapp.use(cors(corsOptions));
