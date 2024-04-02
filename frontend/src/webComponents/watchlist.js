@@ -7,7 +7,7 @@ import AlertMessage from "./AlertMessage";
 import { useData } from '../DataContext';
 import Card from 'react-bootstrap/Card';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 const WatchListCard = () => {
     const {
@@ -35,10 +35,10 @@ const WatchListCard = () => {
         }
     },[watchlistData])
 
-    const handleDeleteStock = async(ticker) => {
-        const delStock = await axios.delete(apiCallURL+'stocks/watchlist/'+ticker);
-        console.log(delStock)
-    };
+    function handleDeleteStock(ticker) {
+        axios.delete(apiCallURL + 'stocks/watchlist/' + ticker);
+        watchlistUpdater();
+    }
 
     return (
         <>
@@ -59,7 +59,7 @@ const WatchListCard = () => {
                     >
                     {/* <Card.Header>Header</Card.Header> */}
                     <Card.Body>
-                        <ClearIcon onClick = {()=> handleDeleteStock(item.ticker)}></ClearIcon>
+                        <Button onClick = {()=> handleDeleteStock(item.ticker)}><ClearIcon></ClearIcon></Button>
                         <Card.Title>{item.ticker} </Card.Title>
                         <Card.Text>
                         {item.companyName}
