@@ -52,18 +52,18 @@ const WatchListCard = (wlDB, deleteFunction) => {
                 <Button onClick = {deleteFunction} variant="border-0 "><ClearIcon></ClearIcon></Button>
                 <Row>
                     <Col>
-                        <h6>{wlTicker}</h6>
-                        <p>{wlName}</p>
+                        <h4>{wlTicker}</h4>
+                        <h5>{wlName}</h5>
                     </Col>
                     <Col>
-                        <h2 className={colorChange(wlD)}>{wlC}</h2>
-                        <h4 className={colorChange(wlD)} >
+                        <h3 className={colorChange(wlD)}>{wlC}</h3>
+                        <h5 className={colorChange(wlD)} >
                         {wlD > 0 ?  (
                             <BiSolidUpArrow />
                             ) : (
                             <BiSolidDownArrow />
                             )}{wlD}
-                        ({wlDP})</h4>
+                        ({wlDP})</h5>
                     </Col>
                 </Row>
                 
