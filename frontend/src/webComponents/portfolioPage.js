@@ -55,10 +55,10 @@ const PortfolioPage = () =>{
             <Container className='mx-auto' sx={{xs:12 , md: 8, lg: 8}}>
                 <h3>My Portfolio</h3>
                 {
-                    wlLoading ? (<Spinner animation="border" variant="primary" />) :
-                    (wlEmpty ? 
+                    pLoading ? (<Spinner animation="border" variant="primary" />) :
+                    (pEmpty ? 
                         <Container>
-                            {wlResult.map((item,idx) => (
+                            {pResult.map((item,idx) => (
                                 <PortfolioCards pDB={item}></PortfolioCards>
                             ))}
                         </Container>:

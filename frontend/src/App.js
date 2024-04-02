@@ -9,6 +9,7 @@ import NavBar from './webComponents/Navbar'
 import Footer from './webComponents/footer';
 import SearchComponent from './webComponents/Search';
 import WatchList from './webComponents/watchlist';
+import PortfolioPage from './webComponents/portfolioPage';
 
 import {DataReceiver} from './DataContext'
 
@@ -38,7 +39,7 @@ function App() {
               />
               <Route
                 path="/portfolio"
-                element=""
+                element={<PortfolioPage />}
                 />
             </Routes>
           </div>

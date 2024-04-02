@@ -2,7 +2,14 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const walletSchema = new schema({
-    amount: Number
+    amount: {
+        type: Number,
+        required: true
+    },
+    key: {
+        type: String,
+        required: true
+    }
 }, { timestamps: true })
 
 const WatchlistSchema = new schema({
@@ -37,7 +44,9 @@ const portfolioSchema = new schema({
 
 const watchList = mongoose.model('Watchlist', WatchlistSchema);
 const portfolio = mongoose.model('Portfolio', portfolioSchema);
+const wallet = mongoose.model('Wallet', walletSchema);
 module.exports = {
     WatchlistM: watchList,
-    PortfolioM: portfolio
+    PortfolioM: portfolio,
+    WalletM: wallet
 }

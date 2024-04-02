@@ -11,7 +11,8 @@ const {
     deleteStockP,
     deleteStockW,
     updateWallet,
-    updatePortfolio
+    updatePortfolio,
+    getWallet
 } = require('../controllers/stockController')
 
 
@@ -34,7 +35,9 @@ router.delete('/portfolio/:id',deleteStockP)
 router.delete('/watchlist/:id',deleteStockW)
 
 //UPDATE a stock
-router.patch('/:id',updateWallet)
+router.patch('/wallet/:key',updateWallet)
 router.patch('/portfolio/:id',updatePortfolio)
+
+router.get('/wallet',getWallet)
 
 module.exports = router

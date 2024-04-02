@@ -22,6 +22,7 @@ const PortfolioCard = (pDB) => {
 
     const [buyModalState, setBuyModalState] = useState(false);
     const [sellModalState, setSellModalState] = useState(false);
+    const [wallet,setWallet] = useState(0);
 
 
     const colorChange = (item) => {
@@ -37,6 +38,9 @@ const PortfolioCard = (pDB) => {
 
         const fetchData = async(ticker) => {
             const getStockData = await axios.get(apiCallURL+'search/stock/'+ticker)
+            const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
+            console.log(getWallet.data)
+            setWallet(getWallet.data)
             setPStock(getStockData.data)
             console.log(getStockData.data)
         }
@@ -84,7 +88,7 @@ const PortfolioCard = (pDB) => {
                 </Row>
                 </Card.Body>
                 <Card.Footer>
-                        {buyModalState ? <BuyModal 
+                        {buyModalState ? <BuyStockModal 
                             closeModal={()=>setBuyModalState(false)} 
                             isOpen={buyModalState} 
                             handleSubmit={handleBuy}
@@ -98,7 +102,7 @@ const PortfolioCard = (pDB) => {
                             wallet={wallet}
                         /> : null}  
 
-                        {sellModalState ? <SellModal 
+                        {sellModalState ? <SellStockModal 
                             closeModal={()=>setSellModalState(false)} 
                             isOpen={sellModalState} 
                             handleSubmit={handleSell}

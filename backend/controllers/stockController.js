@@ -1,4 +1,4 @@
-const {WatchlistM, PortfolioM} = require('../models/stockmodel')
+const {WatchlistM, PortfolioM, WalletM} = require('../models/stockmodel')
 const mongoose = require('mongoose')
 
 //get watchlist details
@@ -38,6 +38,12 @@ const getSinglePortfolioDetail = async(req,res) => {
     }
 
     res.status(200).json(findPortfolio)
+}
+
+const getWallet = async(request, response) => {
+    const wAmount = await WalletM.find({})
+    res.status(200).json(wAmount)
+
 }
 
 //add stock to portfolio
@@ -98,7 +104,7 @@ const deleteStockW = async (request,response) => {
 
 //update wallet
 const updateWallet = async (request,response) => {
-    const {amount} = request.params 
+    const {key} = request.params 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return response.status(404).json({error: "No Stock Details"})
     }
@@ -131,6 +137,7 @@ const updatePortfolio = async(req,res) => {
 module.exports = {
     addStockP,
     addStockW,
+    getWallet,
     getWatchlistDetails,
     getPortfolioDetails,
     getSingleWatchlistDetail,
