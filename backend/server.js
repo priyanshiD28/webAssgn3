@@ -14,7 +14,7 @@ const _dirname = path.dirname("");
 const buildPath = path.join(_dirname, "../frontend/build");
 
 const corsOptions = {
-    origin: ['http://localhost:4000','http://18.225.92.135/']
+    origin: ['http://localhost:3000','http://18.225.92.135/']
 };
 
 webapp.use(cors(corsOptions));
@@ -53,7 +53,7 @@ webapp.use('/api/search',searchRoutes)
 
 webapp.get("/*", function (req, res){
 
-    console.log("Request: ",req)
+    // console.log("Request: ",req)
 
     res.sendFile(
         path.join(__dirname, "../frontend/build/index.html"),

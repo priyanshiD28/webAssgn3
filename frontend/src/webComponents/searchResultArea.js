@@ -1,5 +1,8 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import {useData} from '../DataContext';
+import apiCallURL from '../index.js';
+import axios from 'axios';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Button from 'react-bootstrap/esm/Button';
@@ -12,6 +15,7 @@ import {CiStar} from "react-icons/ci";
 const SearchResultArea = () => {
 
     const {
+
         tickerSymbol, setTickerSymbol,
         compName, setCompanyName,
         exchName, setExchangeName,
@@ -25,7 +29,15 @@ const SearchResultArea = () => {
     } = useData();
 
     const addToWL =  async(ticker,companyName) => {
-        console.log("Adding To Watchlist")
+        await axios.post(apiCallURL+'stocks/watchlist',{
+            ticker: tickerSymbol,
+            companyName: compName
+        })
+        .then((response) =>
+            console.log("Adding To Watchlist")
+            )
+
+
     }
 
     const marketStatus = (unixTime) => {
@@ -38,6 +50,9 @@ const SearchResultArea = () => {
     const colorChange = (item) => {
         return (item > 0 ? 'text-success' : 'text-danger')
     }
+
+    const [starColor, setStarColour] = useState(false);
+    const [watchlistAlert, setWatchListAlert] = useState(false);
 
     const formatDateTime = (unixTime) => {
         const date = new Date(unixTime * 1000); // Convert Unix timestamp to milliseconds
@@ -66,6 +81,66 @@ const SearchResultArea = () => {
 
     const currDate = getCurrentDate();
 
+    const toggleFill = async() => {
+        if(starColor === true){ 
+              const response = await axios.delete(apiCallURL+'stocks/watchlist/'+tickerSymbol)
+              .then(
+                response => {
+                  console.log('Deleted');
+                  setStarColour(false)
+                  setWatchListAlert(false)
+                }
+              )
+            } 
+        else{
+          addToWL(tickerSymbol, compName);
+          setStarColour(true)
+          setWatchListAlert(true)
+        }
+      };
+    
+
+    useEffect(()=>{
+        const getWatchlist = async () =>{
+          try{
+              const response = await axios.get(apiCallURL+'stocks/watchlist/'+tickerSymbol);
+              
+              if(response.status == 200){
+                setStarColour(true)
+                console.log("true")
+              }
+              else {
+                  setStarColour(false)
+                  console.log("False")
+              }
+            }
+            catch(error){
+              console.log(tickerSymbol)
+              setStarColour(false)
+              console.log("False in catch")
+            }
+          }
+          if( tickerSymbol != null ){
+            getWatchlist()
+          }
+      },[tickerSymbol])
+
+
+    // Define iconStyle object with the desired CSS properties
+    const iconStyle = {
+        color: starColor ? 'yellow' : 'inherit', // If starColor is true, set color to yellow, else inherit
+        cursor: 'pointer', // Add other CSS properties as needed
+    };
+
+    // useEffect(()=>{
+    //     const fetchData = async(ticker) => {
+    //         const stockquote = await axios.get(apiCallURL+'search/stock/'+ticker)
+    //         setStockQuote(stockquote.data)
+    //     }
+    //     fetchData(tickerSymbol)
+    //     const interval = setInterval(fetchData, 15000)
+    //     return () => clearInterval(interval)
+    // })
 
     return (
         // <Container>
@@ -86,9 +161,14 @@ const SearchResultArea = () => {
             <div className='container my-5 text-center'>
                 <div className='row align-items-center'>
                     <div className='col-4'>
-                        <h2>{tickerSymbol}</h2> 
-                        <Button variant='btn-primary-outline' onClick={()=> addToWL(tickerSymbol, compName)}><CiStar /></Button>
-                        <Button variant='btn-primary-outline'><FaStar /></Button>
+                        <h2>{tickerSymbol}</h2>
+                        <i className={starColor ? "bi bi-star-fill" : "bi bi-star"}
+                            style={iconStyle}
+                            onClick={toggleFill}
+                        ></i>
+ 
+                        {/* <Button variant='btn-primary-outline' onClick={()=> addToWL(tickerSymbol, compName)}><CiStar /></Button>
+                        <Button variant='btn-primary-outline'><FaStar /></Button> */}
                         <h5>{compName}</h5>
                         <h6>{exchName}</h6>
                         {/* <button type="button" className="btn btn-success" onClick={() => handleBuyModalShow({companySymbol: tickerSymbol ,currentPrice: latestPrice, moneyInWallet:"100",companyName: compName })}>Buy</button> */}

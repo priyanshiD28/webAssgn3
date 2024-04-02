@@ -10,10 +10,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 
-const PortfolioCard = (pDB) => {
+const PortfolioCard = ({pDB}) => {
 
-    const [pTicker, setWLTicker] = useState("");
-    const [pName, setWLName] = useState("");
+    const [pTicker, setPTicker] = useState("");
+    const [pName, setPName] = useState("");
     const [pStock, setPStock] = useState([]);
     const [pC, setPC] = useState([]);
     const [pQuantity, setPQuantity] = useState([]);
@@ -24,35 +24,85 @@ const PortfolioCard = (pDB) => {
     const [sellModalState, setSellModalState] = useState(false);
     const [wallet,setWallet] = useState(0);
 
-    const handleBuy = async()=> {
-        const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
-        setWallet(getWallet.data)
+    const handleBuy = async(stockQuantity, stockPrice)=> {
+        const updatedWallet = wallet - (stockQuantity*stockPrice)
+        const updatedQuantity = pDB.quantity + stockQuantity
+        const updatedCostPrice = (pDB.costprice + stockPrice)/2
+        axios.patch(apiCallURL+'stocks/wallet')
+        .then ((patchWallet) =>
+            {
+                console.log("Wallet Updated")
+                setWallet(patchWallet.amount)
+            }
+        )
+        .catch((error) => {
+            console.log("Error Updating Wallet: ", error)
+        }
+        )
+        if(updatedQuantity!=0) {
+            const newQuantity = await axios.patch(apiCallURL+'search/portfolio/'+pDB.ticker, {
+                quantity: updatedQuantity,
+                avgCostPSh: updatedCostPrice
+            })
+            if(newQuantity.status == 200) {
+                // update portfolio page
+            }
+        }
+
     }
 
-    const handleSell = async() => {
-        const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
-        setWallet(getWallet.data)
+    const handleSell = async(stockQuantity, stockPrice) => {
+        const updatedWallet = wallet + (stockQuantity*stockPrice)
+        const updatedQuantity = pDB.quantity - stockQuantity
+        axios.patch(apiCallURL+'stocks/wallet')
+        .then ((patchWallet) =>
+            {
+                console.log("Wallet Updated")
+                setWallet(patchWallet.amount)
+            }
+        )
+        .catch((error) => {
+            console.log("Error Updating Wallet: ", error)
+        }
+        )
+        if(updatedQuantity!=0) {
+            const newQuantity = await axios.patch(apiCallURL+'search/portfolio/'+pDB.ticker, {
+                quantity: updatedQuantity
+            })
+            if(newQuantity.status == 200) {
+                let newStockVal = pDB
+                newStockVal.quantity = updatedQuantity
+                // update portfolio page
+            }
+        }
+        else {
+            const newQuantity = await axios.delete(apiCallURL+'search/portfolio/'+pDB.ticker)
+            if(newQuantity.status == 200) {
+                //update portfolio page
+            }
+        }
+
     }
 
 
 
     useEffect(() => {
-        console.log(pDB.pDB.ticker)
-        setWLTicker(pDB.pDB.ticker)
-        setWLName(pDB.pDB.companyName)
-        setPQuantity(pDB.pDB.quantity)
-        setPAvg(pDB.pDB.avgCostPSh)
+        console.log(pDB.ticker)
+        setPTicker(pDB.ticker)
+        setPName(pDB.companyName)
+        setPQuantity(pDB.quantity)
+        setPAvg(pDB.avgCostPSh)
 
         const fetchData = async(ticker) => {
             const getStockData = await axios.get(apiCallURL+'search/stock/'+ticker)
-            const getWallet = await axios.get(apiCallURL+'/stocks/wallet')
-            console.log(getWallet.data)
+            const getWallet = await axios.get(apiCallURL+'stocks/wallet')
+            // console.log(getWallet.data)
             setWallet(getWallet.data)
             setPStock(getStockData.data)
-            console.log(getStockData.data)
+            // console.log(getStockData.data)
         }
-        console.log(pDB.pDB.ticker)
-        fetchData(pDB.pDB.ticker)
+        // console.log(pDB.ticker)
+        fetchData(pDB.ticker)
         // console.log(wlStock)
     }, [pDB])
 
@@ -94,13 +144,15 @@ const PortfolioCard = (pDB) => {
                     </Col>
                 </Row>
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer> 
+                    <Button onClick={()=>{setBuyModalState(true)}} className='mx-1'>Buy</Button> 
+                    <Button onClick={()=>{setSellModalState(true)}} className='mx-1 bg-danger border-0'>Sell</Button>
                         {buyModalState ? <BuyStockModal 
-                            closeModal={()=>setBuyModalState(false)} 
-                            isOpen={buyModalState} 
-                            handleSubmit={handleBuy}
-                            currentPrice={pC}
-                            stock={pDB.pDB ? pDB.pDB : {
+                            shutModal={()=>setBuyModalState(false)} 
+                            modalOpenState={buyModalState} 
+                            submitFunct={handleBuy}
+                            currPrice={pC}
+                            stock={pDB ? pDB : {
                                 "ticker": pTicker,
                                 "name": pName,
                                 "costprice": 0,
@@ -110,11 +162,11 @@ const PortfolioCard = (pDB) => {
                         /> : null}  
 
                         {sellModalState ? <SellStockModal 
-                            closeModal={()=>setSellModalState(false)} 
-                            isOpen={sellModalState} 
-                            handleSubmit={handleSell}
-                            currentPrice={pC}
-                            stock={pDB.pDB}
+                            shutModal={()=>setSellModalState(false)} 
+                            modalOpenState={sellModalState} 
+                            submitFunct={handleSell}
+                            currPrice={pC}
+                            stock={pDB}
                             wallet={wallet}
                         /> : null}
 

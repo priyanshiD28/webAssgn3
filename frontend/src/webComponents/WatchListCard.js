@@ -8,7 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 
-const WatchListCard = (wlDB, deleteFunction) => {
+const WatchListCard = ({wlDB, deleteFunction}) => {
 
     const [wlTicker, setWLTicker] = useState("");
     const [wlName, setWLName] = useState("");
@@ -22,16 +22,16 @@ const WatchListCard = (wlDB, deleteFunction) => {
     }
 
     useEffect(() => {
-        console.log(wlDB.wlDB.ticker)
-        setWLTicker(wlDB.wlDB.ticker)
-        setWLName(wlDB.wlDB.companyName)
+        console.log(wlDB.ticker)
+        setWLTicker(wlDB.ticker)
+        setWLName(wlDB.companyName)
         const fetchData = async(ticker) => {
             const getStockData = await axios.get(apiCallURL+'search/stock/'+ticker)
             setWLStock(getStockData.data)
             console.log(getStockData.data)
         }
-        console.log(wlDB.wlDB.ticker)
-        fetchData(wlDB.wlDB.ticker)
+        console.log(wlDB.ticker)
+        fetchData(wlDB.ticker)
         const interval = setInterval(fetchData, 15000)
         return () => clearInterval(interval)
         console.log(wlStock)
@@ -51,7 +51,11 @@ const WatchListCard = (wlDB, deleteFunction) => {
                 className="mx-auto my-2"
             >        
             <Card.Body>
-                <Button onClick = {deleteFunction} variant="border-0 "><ClearIcon></ClearIcon></Button>
+                <Button onClick = {(e)=>{
+                    console.log("delete button clicked")
+                    deleteFunction(e)
+                }
+                    } variant="border-0 "><ClearIcon></ClearIcon></Button>
                 <Row>
                     <Col>
                         <h4>{wlTicker}</h4>

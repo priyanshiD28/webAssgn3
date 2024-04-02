@@ -5,10 +5,6 @@ const walletSchema = new schema({
     amount: {
         type: Number,
         required: true
-    },
-    key: {
-        type: String,
-        required: true
     }
 }, { timestamps: true })
 

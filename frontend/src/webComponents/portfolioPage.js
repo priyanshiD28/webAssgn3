@@ -13,13 +13,18 @@ const PortfolioPage = () =>{
 
     const [pLoading, setPLoading] = useState(true);
     const [pEmpty, setPEmpty] = useState(false);
+    const [check, setCheck] = useState(0);
 
     const [pResult, setPResult] = useState([]);
+    const [walletResult, setWalletResult] = useState([]);
+    const [walletVal, setWalletVal] = useState(0);
     
     useEffect(()=>{
         const getPStocks = async () =>{
             try{
                 const pData = await axios.get(apiCallURL+'stocks/portfolio');
+                const pWallet = await axios.get(apiCallURL+'stocks/wallet');
+                setWalletResult(pWallet.data)
 
                 if(pData.status == 200){
                     
@@ -46,7 +51,13 @@ const PortfolioPage = () =>{
             }
 
         getPStocks()
-      },[])
+    },[check])
+
+    useEffect(() => {
+        walletResult.map(item => setWalletVal(item.amount))
+    },[walletResult])
+
+
 
     
 
@@ -54,6 +65,7 @@ const PortfolioPage = () =>{
         <>
             <Container className='mx-auto' sx={{xs:12 , md: 8, lg: 8}}>
                 <h3>My Portfolio</h3>
+                <h5>Money in Wallet: ${walletVal}</h5>
                 {
                     pLoading ? (<Spinner animation="border" variant="primary" />) :
                     (pEmpty ? 

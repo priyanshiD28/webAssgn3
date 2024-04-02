@@ -55,7 +55,6 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                 <NavLink className={getNavLinkClass} to="/watchlist">Watchlist</NavLink>
-                {console.log('Watchlist')}
                 </li>
                 <li className="nav-item">
                 <NavLink className={getNavLinkClass} to="/portfolio">Portfolio</NavLink>
