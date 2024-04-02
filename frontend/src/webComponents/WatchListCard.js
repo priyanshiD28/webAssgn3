@@ -5,7 +5,8 @@ import apiCallURL from '../index.js';
 
 import Card from 'react-bootstrap/Card';
 import ClearIcon from '@mui/icons-material/Clear';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 
 const WatchListCard = (wlDB, deleteFunction) => {
 
@@ -15,6 +16,10 @@ const WatchListCard = (wlDB, deleteFunction) => {
     const [wlC, setWLC] = useState([]);
     const [wlD, setWLD] = useState([]);
     const [wlDP, setWLDP] = useState([]);
+
+    const colorChange = (item) => {
+        return (item > 0 ? 'text-success' : 'text-danger')
+    }
 
     useEffect(() => {
         console.log(wlDB.wlDB.ticker)
@@ -44,14 +49,24 @@ const WatchListCard = (wlDB, deleteFunction) => {
                 className="mx-auto my-2"
             >        
             <Card.Body>
-                <Button onClick = {deleteFunction}><ClearIcon></ClearIcon></Button>
-                <Card.Title>{wlTicker} </Card.Title>
-                <Card.Text>
-                    {wlName}
-                </Card.Text>
-                <Card.Text>{wlC}</Card.Text>
-                <Card.Text>{wlD}</Card.Text>
-                <Card.Text>{wlDP}</Card.Text>
+                <Button onClick = {deleteFunction} className='btn-primary-outline'><ClearIcon></ClearIcon></Button>
+                <Row>
+                    <Col>
+                        <h6>{wlTicker}</h6>
+                        <p>{wlName}</p>
+                    </Col>
+                    <Col>
+                        <h2 className={colorChange(wlD)}>{wlC}</h2>
+                        <h4 className={colorChange(wlD)} >
+                        {wlD > 0 ?  (
+                            <BiSolidUpArrow />
+                            ) : (
+                            <BiSolidDownArrow />
+                            )}{wlD}
+                        ({wlDP})</h4>
+                    </Col>
+                </Row>
+                
                 </Card.Body>
             </Card>
         </>
