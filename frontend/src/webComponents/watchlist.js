@@ -60,6 +60,7 @@ const WatchlistPage = () =>{
 
         getWLStocks()
         console.log(wlEmpty)
+        console.log(wlResult)
       },[check])
 
     
